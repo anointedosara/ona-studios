@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Loader from "@/components/Loader";
 import Cursor from "@/components/Cursor";
 import ThreeBackground from "@/components/ThreeBackground";
@@ -6,16 +5,7 @@ import Nav from "@/components/Nav";
 import SiteAnimations from "@/components/SiteAnimations";
 import ContactForm from "@/components/ContactForm";
 import Services from "@/components/Services";
-
-const UNSPLASH = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&q=80`;
-
-const WORK = [
-  { n: "01", title: "Sahara Bank — Rebrand", tag: "Identity & product design", c1: "#ff6b4a", c2: "#ffd166", img: UNSPLASH("photo-1561070791-2526d30994b5") },
-  { n: "02", title: "Pulse — Music App", tag: "Mobile UI / UX & motion", c1: "#7c5cff", c2: "#22d3ee", img: UNSPLASH("photo-1493225457124-a3eb161ffa5f") },
-  { n: "03", title: "Terra — 3D Commerce", tag: "WebGL & creative dev", c1: "#00d68f", c2: "#a3ff12", img: UNSPLASH("photo-1620641788421-7a1c342ea42e") },
-  { n: "04", title: "Lumen — SaaS Platform", tag: "Design system & web", c1: "#ff4d9d", c2: "#ff9a3c", img: UNSPLASH("photo-1517245386807-bb43f82c33c4") },
-];
+import Work from "@/components/Work";
 
 const PROCESS = [
   { n: "01", title: "Discover", desc: "We dig into your goals, users and market until the real problem is crystal clear." },
@@ -146,55 +136,7 @@ export default function Home() {
         </section>
 
         {/* ---------- WORK ---------- */}
-        <section id="work" className="py-[clamp(4rem,8vw,7rem)]">
-          <div className="mb-12 px-[clamp(1.2rem,4vw,4rem)]">
-            <span data-fade className="mb-3 block text-[0.9rem] text-accent">
-              {"// Selected work"}
-            </span>
-            <h2
-              data-fade
-              className="font-display text-[clamp(2rem,6vw,4.5rem)] font-medium tracking-[-0.02em]"
-            >
-              Things we&apos;re proud of
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 px-[clamp(1.2rem,4vw,4rem)] md:grid-cols-2">
-            {WORK.map((p) => (
-              <article
-                key={p.n}
-                data-tilt
-                data-fade
-                className="group overflow-hidden rounded-[20px] border border-line bg-bg-soft"
-              >
-                <div className="relative aspect-[16/11] overflow-hidden">
-                  <Image
-                    src={p.img}
-                    alt={p.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
-                  />
-                  {/* Brand-tint gradient overlay keeps the palette consistent */}
-                  <div
-                    className="absolute inset-0 opacity-60 mix-blend-multiply transition-opacity duration-700 group-hover:opacity-40"
-                    style={{
-                      backgroundImage: `linear-gradient(135deg, ${p.c1}, ${p.c2})`,
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-bg/70 to-transparent" />
-                  <span className="absolute left-6 top-5 z-10 font-display text-2xl font-semibold text-white">
-                    {p.n}
-                  </span>
-                </div>
-                <div className="flex items-baseline justify-between p-6">
-                  <h3 className="font-display text-2xl font-medium">{p.title}</h3>
-                  <p className="text-[0.95rem] text-muted">{p.tag}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
+        <Work />
 
         {/* ---------- SERVICES ---------- */}
         <Services />

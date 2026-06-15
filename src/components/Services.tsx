@@ -33,7 +33,11 @@ export default function Services() {
         {SERVICES.map((s, i) => {
           const isOpen = open === i;
           return (
-            <div key={s.n} data-fade className="service border-b border-line">
+            <div
+              key={s.n}
+              data-fade
+              className={`service border-b border-line ${isOpen ? "is-open" : ""}`}
+            >
               <button
                 type="button"
                 onClick={() => setOpen(isOpen ? null : i)}
@@ -76,7 +80,7 @@ export default function Services() {
                 }`}
               >
                 <div className="overflow-hidden">
-                  <p className={`${PX} pb-8 text-muted`}>{s.desc}</p>
+                  <p className={`service-muted ${PX} pb-8 text-muted`}>{s.desc}</p>
                 </div>
               </div>
             </div>

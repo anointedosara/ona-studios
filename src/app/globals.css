@@ -129,8 +129,16 @@ em { font-style: italic; color: var(--color-accent); }
   .service > * { position: relative; z-index: 1; }
   .service:hover { color: #0a0a0f; }
   .service:hover::before { transform: translateY(0); }
-  .service:hover .service-muted { color: rgba(10, 10, 15, .7); }
+  .service:hover .service-muted { color: rgb(255, 255, 255); }
   .service:hover .service-arrow { transform: translate(6px, -6px); }
+
+  /* Mobile: tapping a row expands it (no reliable :hover on touch),
+     so mirror the hover fill via the .is-open state instead. */
+  @media (max-width: 767px) {
+    .service.is-open { color: #0a0a0f; }
+    .service.is-open::before { transform: translateY(0); }
+    .service.is-open .service-muted { color: rgb(255, 255, 255); }
+  }
 
   /* ---- Scroll indicator line ---- */
   .scroll-line { position: relative; overflow: hidden; }
