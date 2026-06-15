@@ -127,9 +127,12 @@ em { font-style: italic; color: var(--color-accent); }
     transition: transform .5s var(--ease-out-expo);
   }
   .service > * { position: relative; z-index: 1; }
+  /* Color owned here (not via the text-muted utility) so the hover/open
+     overrides below actually win the cascade. */
+  .service-muted { color: var(--color-muted); }
   .service:hover { color: #0a0a0f; }
   .service:hover::before { transform: translateY(0); }
-  .service:hover .service-muted { color: rgb(255, 255, 255); }
+  .service:hover .service-muted { color: #ffffff; }
   .service:hover .service-arrow { transform: translate(6px, -6px); }
 
   /* Mobile: tapping a row expands it (no reliable :hover on touch),
@@ -137,7 +140,7 @@ em { font-style: italic; color: var(--color-accent); }
   @media (max-width: 767px) {
     .service.is-open { color: #0a0a0f; }
     .service.is-open::before { transform: translateY(0); }
-    .service.is-open .service-muted { color: rgb(255, 255, 255); }
+    .service.is-open .service-muted { color: #ffffff; }
   }
 
   /* ---- Scroll indicator line ---- */

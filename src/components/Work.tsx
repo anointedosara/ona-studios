@@ -202,11 +202,11 @@ function ProjectModal({
       role="dialog"
       aria-modal="true"
       aria-label={p.title}
-      className="fixed inset-0 z-[1100] flex items-start justify-center overflow-y-auto bg-bg/80 p-[clamp(1rem,4vw,3rem)] backdrop-blur-md"
+      className="fixed inset-0 z-[900] flex items-start justify-center overflow-y-auto bg-bg/80 px-[clamp(1rem,4vw,3rem)] pb-[clamp(1rem,4vw,3rem)] pt-[clamp(5.5rem,12vw,7rem)] backdrop-blur-md"
       onClick={onClose}
     >
       <div
-        className="relative my-auto w-full max-w-[820px] overflow-hidden rounded-[24px] border border-line bg-bg-soft"
+        className="relative w-full max-w-[820px] overflow-hidden rounded-[24px] border border-line bg-bg-soft"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header image */}

@@ -45,14 +45,14 @@ export default function Services() {
                 aria-controls={`service-panel-${i}`}
                 className={`grid w-full grid-cols-[60px_1fr_auto] items-center gap-6 ${PX} py-9 text-left md:grid-cols-[90px_1fr_2fr_auto] md:gap-8`}
               >
-                <span className="service-muted font-display text-[1.1rem] text-muted">
+                <span className="service-muted font-display text-[1.1rem]">
                   {s.n}
                 </span>
                 <h3 className="font-display text-[clamp(1.5rem,3.5vw,2.4rem)] font-medium">
                   {s.title}
                 </h3>
                 {/* Desktop: description sits inline */}
-                <p className="service-muted hidden max-w-[50ch] text-base text-muted md:block">
+                <p className="service-muted hidden max-w-[50ch] text-base md:block">
                   {s.desc}
                 </p>
                 {/* Desktop: diagonal arrow */}
@@ -80,7 +80,7 @@ export default function Services() {
                 }`}
               >
                 <div className="overflow-hidden">
-                  <p className={`service-muted ${PX} pb-8 text-muted`}>{s.desc}</p>
+                  <p className={`service-muted ${PX} pb-8`}>{s.desc}</p>
                 </div>
               </div>
             </div>
