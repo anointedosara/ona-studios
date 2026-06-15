@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Theme tokens (Tailwind v4)
+   ============================================================ */
+@theme {
+  --color-bg: #0a0a0f;
+  --color-bg-soft: #111119;
+  --color-ink: #f4f1ea;
+  --color-muted: #8a8a99;
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-accent: #ff6b4a;
+  --color-accent2: #7c5cff;
+
+  --font-display: var(--font-clash), var(--font-space-grotesk), system-ui, sans-serif;
+  --font-body: var(--font-space-grotesk), system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-blink: blink 2s infinite;
+  --animate-scrolldot: scrolldot 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  @keyframes scrolldot {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(250%); }
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (pointer: fine) {
+  body { cursor: none; }
+}
+
+em { font-style: italic; color: var(--color-accent); }
+
+::selection { background: var(--color-accent); color: #0a0a0f; }
+
+/* Reveal default state — JS animates these in */
+[data-fade] { opacity: 0; transform: translateY(40px); }
+.hero-line { display: block; transform: translateY(110%); }
+
+/* ============================================================
+   Custom components (pseudo-elements Tailwind can't express)
+   ============================================================ */
+@layer components {
+  /* ---- Custom cursor ---- */
+  .cursor,
+  .cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transform: translate3d(-50%, -50%, 0);
+  }
+  .cursor {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: width .3s var(--ease-out-expo), height .3s var(--ease-out-expo),
+                background .3s var(--ease-out-expo);
+  }
+  .cursor-dot { width: 5px; height: 5px; background: #fff; }
+  .cursor.is-hover { width: 72px; height: 72px; background: #fff; }
+  @media (pointer: coarse) {
+    .cursor, .cursor-dot { display: none; }
+    body { cursor: auto; }
+  }
+
+  /* ---- Buttons with fill-up hover ---- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 1rem 1.8rem; border-radius: 9999px;
+    font-size: 0.95rem; font-weight: 500;
+    position: relative; overflow: hidden;
+    transition: color .4s var(--ease-out-expo);
+  }
+  .btn > span { position: relative; z-index: 2; }
+  .btn::before {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    transform: translateY(101%);
+    transition: transform .5s var(--ease-out-expo);
+  }
+  .btn:hover::before { transform: translateY(0); }
+  .btn--primary { background: var(--color-accent); color: #0a0a0f; }
+  .btn--primary::before { background: var(--color-ink); }
+  .btn--ghost { border: 1px solid var(--color-line); color: var(--color-ink); }
+  .btn--ghost::before { background: var(--color-ink); }
+  .btn--ghost:hover { color: var(--color-bg); }
+
+  /* ---- Nav underline ---- */
+  .nav-link { position: relative; padding: .2rem 0; }
+  .nav-link::after {
+    content: ""; position: absolute; left: 0; bottom: -2px;
+    width: 100%; height: 1px; background: currentColor;
+    transform: scaleX(0); transform-origin: right;
+    transition: transform .4s var(--ease-out-expo);
+  }
+  .nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+  /* ---- Service row fill ---- */
+  .service { position: relative; overflow: hidden; transition: color .4s var(--ease-out-expo); }
+  .service::before {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    background: var(--color-accent); transform: translateY(100%);
+    transition: transform .5s var(--ease-out-expo);
+  }
+  .service > * { position: relative; z-index: 1; }
+  .service:hover { color: #0a0a0f; }
+  .service:hover::before { transform: translateY(0); }
+  .service:hover .service-muted { color: rgba(10, 10, 15, .7); }
+  .service:hover .service-arrow { transform: translate(6px, -6px); }
+
+  /* ---- Scroll indicator line ---- */
+  .scroll-line { position: relative; overflow: hidden; }
+  .scroll-line::after {
+    content: ""; position: absolute; top: 0; left: 0;
+    width: 100%; height: 40%;
+    background: var(--color-accent);
+    animation: var(--animate-scrolldot);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  [data-fade] { opacity: 1; transform: none; }
+  .hero-line { transform: none; }
+}
